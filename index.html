@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aster Grove Realty</title>
+  <style>
+    :root {
+      --bg: #f5efe7;
+      --bg-deep: #1d2a2f;
+      --panel: rgba(255, 250, 244, 0.74);
+      --panel-strong: rgba(255, 248, 240, 0.92);
+      --ink: #1d1a17;
+      --muted: #5d564f;
+      --accent: #b7653c;
+      --accent-soft: #e4b489;
+      --line: rgba(34, 27, 21, 0.12);
+      --shadow: 0 24px 70px rgba(26, 22, 19, 0.16);
+      --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+      --sans: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--sans);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(255, 211, 168, 0.8), transparent 34%),
+        radial-gradient(circle at 80% 20%, rgba(184, 120, 77, 0.18), transparent 26%),
+        linear-gradient(180deg, #efe5d9 0%, #f7f1ea 35%, #f0e8dd 100%);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .site-shell {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .parallax-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -3;
+      will-change: transform;
+    }
+
+    .parallax-layer.one {
+      background:
+        radial-gradient(circle at 15% 25%, rgba(255, 244, 227, 0.95), transparent 0 20%),
+        radial-gradient(circle at 78% 18%, rgba(186, 103, 60, 0.26), transparent 0 18%),
+        radial-gradient(circle at 68% 72%, rgba(38, 51, 58, 0.18), transparent 0 24%);
+      opacity: 0.95;
+    }
+
+    .parallax-layer.two {
+      z-index: -2;
+      background:
+        linear-gradient(120deg, rgba(35, 44, 47, 0.05), transparent 30%),
+        linear-gradient(180deg, transparent, rgba(34, 27, 21, 0.06));
+    }
+
+    .parallax-layer.three::before,
+    .parallax-layer.three::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(2px);
+      opacity: 0.5;
+    }
+
+    .parallax-layer.three::before {
+      width: 42vw;
+      height: 42vw;
+      min-width: 320px;
+      min-height: 320px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.45), transparent 65%);
+      left: -10vw;
+      top: 18vh;
+    }
+
+    .parallax-layer.three::after {
+      width: 28vw;
+      height: 28vw;
+      min-width: 220px;
+      min-height: 220px;
+      background: radial-gradient(circle, rgba(228, 180, 137, 0.35), transparent 65%);
+      right: -6vw;
+      top: 56vh;
+    }
+
+    .frame {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(16px);
+      background: rgba(245, 239, 231, 0.62);
+      border-bottom: 1px solid rgba(34, 27, 21, 0.08);
+    }
+
+    .site-header .frame {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 0;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 30%, #f5d2b2, #b7653c 68%, #7e4426 100%);
+      box-shadow: 0 12px 30px rgba(183, 101, 60, 0.28);
+    }
+
+    .brand-copy span {
+      display: block;
+    }
+
+    .brand-copy .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .brand-copy .name {
+      font-family: var(--serif);
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      color: var(--ink);
+    }
+
+    .nav-cta {
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: var(--bg-deep);
+      color: #f7efe5;
+      box-shadow: 0 14px 28px rgba(29, 42, 47, 0.22);
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    section {
+      padding: 96px 0;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      align-items: center;
+      padding: 70px 0 56px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255, 248, 240, 0.82);
+      border: 1px solid rgba(34, 27, 21, 0.09);
+      color: var(--muted);
+      letter-spacing: 0.14em;
+      font-size: 11px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero-copy h1 {
+      font-family: var(--serif);
+      font-size: clamp(3.4rem, 7vw, 6.5rem);
+      line-height: 0.94;
+      letter-spacing: -0.04em;
+      max-width: 10ch;
+      margin-bottom: 24px;
+    }
+
+    .hero-copy p {
+      max-width: 600px;
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 38px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-1px);
+    }
+
+    .button.primary {
+      background: var(--bg-deep);
+      color: #f8f1e8;
+      box-shadow: 0 18px 34px rgba(29, 42, 47, 0.18);
+    }
+
+    .button.secondary {
+      background: rgba(255, 250, 244, 0.55);
+      border-color: rgba(29, 42, 47, 0.14);
+      color: var(--ink);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      max-width: 680px;
+    }
+
+    .stat {
+      padding: 20px 18px;
+      border-radius: 22px;
+      background: rgba(255, 252, 247, 0.6);
+      border: 1px solid rgba(34, 27, 21, 0.08);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .stat strong {
+      display: block;
+      font-family: var(--serif);
+      font-size: 32px;
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 720px;
+      display: grid;
+      place-items: center;
+    }
+
+    .tower {
+      position: relative;
+      width: min(100%, 500px);
+      aspect-ratio: 0.8;
+      border-radius: 34px;
+      background:
+        linear-gradient(180deg, rgba(17, 22, 26, 0.08), rgba(17, 22, 26, 0.34)),
+        url("https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1200&q=80") center/cover;
+      border: 1px solid rgba(34, 27, 21, 0.08);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .tower::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.14) 0 2px, transparent 2px 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0 2px, transparent 2px 14%);
+      background-size: 72px 100%, 100% 66px;
+      opacity: 0.6;
+      mix-blend-mode: soft-light;
+    }
+
+    .tower::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 42%;
+      background: linear-gradient(180deg, transparent, rgba(20, 24, 27, 0.72));
+      opacity: 1;
+    }
+
+    .tower-label,
+    .floating-card {
+      position: absolute;
+      backdrop-filter: blur(12px);
+      background: rgba(255, 250, 244, 0.76);
+      border: 1px solid rgba(34, 27, 21, 0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .tower-label {
+      left: 28px;
+      top: 28px;
+      padding: 18px 18px 16px;
+      border-radius: 22px;
+      width: 210px;
+    }
+
+    .tower-label span,
+    .floating-card .label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .tower-label strong {
+      display: block;
+      font-family: var(--serif);
+      font-size: 28px;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .tower-label p,
+    .floating-card p {
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    .floating-card {
+      width: min(230px, 48vw);
+      padding: 18px;
+      border-radius: 22px;
+    }
+
+    .floating-card strong {
+      display: block;
+      font-family: var(--serif);
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .card-a {
+      right: -12px;
+      top: 20%;
+    }
+
+    .card-b {
+      left: -28px;
+      bottom: 10%;
+    }
+
+    .intro-grid,
+    .services-grid,
+    .story-grid,
+    .testimonial-grid,
+    .footer-grid {
+      display: grid;
+      gap: 28px;
+    }
+
+    .intro-grid,
+    .story-grid {
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: start;
+    }
+
+    .section-heading .mini {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .section-heading h2 {
+      font-family: var(--serif);
+      font-size: clamp(2.3rem, 4vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+      max-width: 12ch;
+    }
+
+    .section-heading p,
+    .body-copy {
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+      max-width: 64ch;
+    }
+
+    .intro-panel,
+    .story-panel,
+    .quote-card,
+    .contact-panel {
+      background: var(--panel);
+      border: 1px solid rgba(34, 27, 21, 0.08);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .intro-panel {
+      padding: 34px;
+    }
+
+    .intro-panel ul {
+      list-style: none;
+      display: grid;
+      gap: 16px;
+    }
+
+    .intro-panel li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      align-items: start;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .intro-panel li:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .intro-panel .index {
+      font-family: var(--serif);
+      font-size: 30px;
+      line-height: 1;
+      color: var(--accent);
+    }
+
+    .intro-panel strong,
+    .service-card h3,
+    .story-panel h3 {
+      display: block;
+      font-family: var(--serif);
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .services-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 34px;
+    }
+
+    .service-card {
+      padding: 30px;
+      border-radius: 28px;
+      background: var(--panel-strong);
+      border: 1px solid rgba(34, 27, 21, 0.08);
+      box-shadow: var(--shadow);
+      transform: translateY(0);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .service-card:hover,
+    .service-card:focus-within {
+      transform: translateY(-6px);
+      box-shadow: 0 28px 74px rgba(26, 22, 19, 0.18);
+    }
+
+    .service-tag {
+      display: inline-block;
+      margin-bottom: 18px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .service-card p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    .service-card a {
+      font-weight: 600;
+    }
+
+    .story-panel {
+      padding: 34px;
+      display: grid;
+      gap: 22px;
+    }
+
+    .story-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .story-strip div {
+      min-height: 150px;
+      border-radius: 22px;
+      background-position: center;
+      background-size: cover;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story-strip div:nth-child(1) {
+      background-image:
+        linear-gradient(180deg, rgba(27, 34, 38, 0.1), rgba(27, 34, 38, 0.38)),
+        url("https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=900&q=80");
+    }
+
+    .story-strip div:nth-child(2) {
+      background-image:
+        linear-gradient(180deg, rgba(27, 34, 38, 0.08), rgba(27, 34, 38, 0.34)),
+        url("https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=80");
+    }
+
+    .story-strip div:nth-child(3) {
+      background-image:
+        linear-gradient(180deg, rgba(27, 34, 38, 0.1), rgba(27, 34, 38, 0.4)),
+        url("https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=900&q=80");
+    }
+
+    .story-strip div::after {
+      content: "";
+      position: absolute;
+      inset: auto 18px 18px 18px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .testimonial-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 34px;
+    }
+
+    .quote-card {
+      padding: 28px;
+    }
+
+    .quote-card .stars {
+      color: var(--accent);
+      letter-spacing: 0.22em;
+      font-size: 12px;
+      margin-bottom: 18px;
+    }
+
+    .quote-card p {
+      font-family: var(--serif);
+      font-size: 26px;
+      line-height: 1.34;
+      margin-bottom: 24px;
+    }
+
+    .quote-card span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .contact-panel {
+      padding: 42px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 20px;
+      background:
+        linear-gradient(135deg, rgba(255, 249, 242, 0.88), rgba(236, 221, 205, 0.78)),
+        rgba(255, 249, 242, 0.82);
+    }
+
+    .feature-gallery {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      margin-top: 34px;
+    }
+
+    .gallery-card {
+      position: relative;
+      min-height: 300px;
+      border-radius: 30px;
+      overflow: hidden;
+      border: 1px solid rgba(34, 27, 21, 0.08);
+      box-shadow: var(--shadow);
+      background-position: center;
+      background-size: cover;
+    }
+
+    .gallery-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(19, 24, 28, 0.08), rgba(19, 24, 28, 0.66));
+    }
+
+    .gallery-card .copy {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      color: #fff7ef;
+      z-index: 1;
+    }
+
+    .gallery-card .copy span {
+      display: inline-block;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      opacity: 0.9;
+    }
+
+    .gallery-card .copy h3 {
+      font-family: var(--serif);
+      font-size: 32px;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .gallery-card .copy p {
+      max-width: 44ch;
+      line-height: 1.6;
+    }
+
+    .gallery-card.large {
+      min-height: 520px;
+      background-image: url("https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1400&q=80");
+    }
+
+    .gallery-stack {
+      display: grid;
+      gap: 24px;
+    }
+
+    .gallery-card.small-a {
+      background-image: url("https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80");
+    }
+
+    .gallery-card.small-b {
+      background-image: url("https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1200&q=80");
+    }
+
+    .contact-panel h2 {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 3.5vw, 4rem);
+      line-height: 1;
+      margin-bottom: 14px;
+      max-width: 10ch;
+    }
+
+    .contact-panel p {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+      max-width: 60ch;
+    }
+
+    footer {
+      padding: 26px 0 48px;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+      color: var(--muted);
+      font-size: 14px;
+      border-top: 1px solid rgba(34, 27, 21, 0.08);
+      padding-top: 24px;
+      gap: 18px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .intro-grid,
+      .story-grid,
+      .contact-panel,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .services-grid,
+      .testimonial-grid,
+      .feature-gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        min-height: 560px;
+      }
+
+      .card-a,
+      .card-b {
+        position: absolute;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .site-header .frame {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav {
+        flex-wrap: wrap;
+        gap: 14px 18px;
+      }
+
+      section {
+        padding: 76px 0;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 36px;
+      }
+
+      .hero-stats,
+      .story-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        min-height: 480px;
+      }
+
+      .tower {
+        width: 100%;
+      }
+
+      .tower-label {
+        width: calc(100% - 48px);
+      }
+
+      .floating-card {
+        width: auto;
+        max-width: calc(100% - 48px);
+      }
+
+      .card-a {
+        right: 20px;
+        top: auto;
+        bottom: 22%;
+      }
+
+      .card-b {
+        left: 20px;
+        bottom: 18px;
+      }
+
+      .contact-panel {
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-shell">
+    <div class="parallax-layer one" data-parallax="0.12"></div>
+    <div class="parallax-layer two" data-parallax="0.22"></div>
+    <div class="parallax-layer three" data-parallax="0.32"></div>
+
+    <header class="site-header">
+      <div class="frame">
+        <a class="brand" href="#top">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-copy">
+            <span class="eyebrow">Boutique Real Estate</span>
+            <span class="name">Aster Grove</span>
+          </span>
+        </a>
+
+        <nav class="nav" aria-label="Primary">
+          <a href="#approach">Approach</a>
+          <a href="#services">Services</a>
+          <a href="#story">Story</a>
+          <a href="#testimonials">Client Notes</a>
+          <a class="nav-cta" href="#contact">Book a Consultation</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="frame hero-grid">
+          <div class="hero-copy reveal">
+            <span class="kicker">City homes. Sharp strategy. Calm guidance.</span>
+            <h1>Find the place that changes your pace.</h1>
+            <p>
+              A parallax-ready luxury real estate landing page for buyers, sellers,
+              and developers who want market confidence wrapped in a warm, editorial brand.
+              This demo is built to be re-skinned for your client quickly.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#contact">Schedule a Private Tour</a>
+              <a class="button secondary" href="#services">Explore Services</a>
+            </div>
+
+            <div class="hero-stats">
+              <div class="stat">
+                <strong>$420M</strong>
+                <span>Closed across luxury residential and investment properties.</span>
+              </div>
+              <div class="stat">
+                <strong>16 Days</strong>
+                <span>Average launch-to-offer window for signature listings.</span>
+              </div>
+              <div class="stat">
+                <strong>4.9 / 5</strong>
+                <span>Client satisfaction built on responsiveness and discretion.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-visual reveal">
+            <div class="tower">
+              <div class="tower-label">
+                <span>Featured Property</span>
+                <strong>Penthouse Eight</strong>
+                <p>River views, sculpted interiors, and private access to the skyline.</p>
+              </div>
+            </div>
+
+            <div class="floating-card card-a reveal">
+              <span class="label">Market Pulse</span>
+              <strong>West End +12%</strong>
+              <p>Buyer demand continues to outpace comparable inventory in top school districts.</p>
+            </div>
+
+            <div class="floating-card card-b reveal">
+              <span class="label">Seller Strategy</span>
+              <strong>Launch with atmosphere</strong>
+              <p>We pair pricing, staging, and narrative so listings feel memorable from the first scroll.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="approach">
+        <div class="frame intro-grid">
+          <div class="section-heading reveal">
+            <span class="mini">Approach</span>
+            <h2>Built like a magazine feature, tuned like a sales funnel.</h2>
+            <p>
+              The inspiration here is the emotional clarity of premium brokerage sites: confident
+              headlines, spacious pacing, and trust-building sections that feel elevated without
+              becoming vague. We can swap this demo copy for your client’s tone, neighborhoods,
+              and offer structure.
+            </p>
+          </div>
+
+          <div class="intro-panel reveal">
+            <ul>
+              <li>
+                <span class="index">01</span>
+                <div>
+                  <strong>Intentional first impression</strong>
+                  <p class="body-copy">The hero uses layered motion and soft glass panels instead of a flat brochure look.</p>
+                </div>
+              </li>
+              <li>
+                <span class="index">02</span>
+                <div>
+                  <strong>Clear service framing</strong>
+                  <p class="body-copy">Every section gives the visitor a reason to keep scrolling toward inquiry.</p>
+                </div>
+              </li>
+              <li>
+                <span class="index">03</span>
+                <div>
+                  <strong>Easy to customize</strong>
+                  <p class="body-copy">All content is self-contained in one HTML file, so we can adapt it quickly for a client presentation.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="services">
+        <div class="frame">
+          <div class="section-heading reveal">
+            <span class="mini">Services</span>
+            <h2>A full-service presentation for buyers, sellers, and development teams.</h2>
+            <p>
+              The layout below mirrors the kind of overview sections that premium agencies use,
+              but keeps the language concrete enough to support conversion.
+            </p>
+          </div>
+
+          <div class="services-grid">
+            <article class="service-card reveal">
+              <span class="service-tag">Residential</span>
+              <h3>Buyer Representation</h3>
+              <p>
+                Neighborhood strategy, off-market introductions, touring plans, and negotiation
+                support for clients who want a calmer path to the right property.
+              </p>
+              <a href="#contact">Start your search</a>
+            </article>
+
+            <article class="service-card reveal">
+              <span class="service-tag">Marketing</span>
+              <h3>Seller Launch Strategy</h3>
+              <p>
+                Positioning, pricing, staging direction, creative production, and listing rollout
+                designed to make your property feel distinct from day one.
+              </p>
+              <a href="#contact">Plan your listing</a>
+            </article>
+
+            <article class="service-card reveal">
+              <span class="service-tag">Advisory</span>
+              <h3>Development & Investment</h3>
+              <p>
+                Market reads, pre-development storytelling, absorption pacing, and product guidance
+                for teams shaping high-value residential opportunities.
+              </p>
+              <a href="#contact">Discuss a project</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="story">
+        <div class="frame story-grid">
+          <div class="section-heading reveal">
+            <span class="mini">Story</span>
+            <h2>Good real estate brands feel human before they feel corporate.</h2>
+            <p>
+              This section gives your client room for founder perspective, market philosophy, or a
+              neighborhood-led point of view. The design keeps it rich and atmospheric while still
+              making space for practical proof.
+            </p>
+          </div>
+
+          <div class="story-panel reveal">
+            <h3>Local knowledge with editorial restraint</h3>
+            <p class="body-copy">
+              Rather than overwhelming visitors with search widgets immediately, this concept leads
+              with tone, trust, and clear service categories. It works well for boutique agencies,
+              luxury agents, architecture-minded brokers, and development consultants.
+            </p>
+            <div class="story-strip" aria-hidden="true">
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+            <p class="body-copy">
+              If you want, we can also replace these abstract image blocks with real photography,
+              neighborhood data, featured listings, or agent headshots next.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="featured-places">
+        <div class="frame">
+          <div class="section-heading reveal">
+            <span class="mini">Featured Spaces</span>
+            <h2>Photography gives the parallax layout something emotional to hold onto.</h2>
+            <p>
+              I added live image-backed panels here so the page feels closer to the visual rhythm of the
+              reference site. These can be replaced with your client’s listings, interiors, or neighborhood shots.
+            </p>
+          </div>
+
+          <div class="feature-gallery">
+            <article class="gallery-card large reveal">
+              <div class="copy">
+                <span>Signature Listing</span>
+                <h3>Skyline-facing modern residence</h3>
+                <p>Use this larger feature slot for a marquee listing, development launch, or a premium lifestyle image.</p>
+              </div>
+            </article>
+
+            <div class="gallery-stack">
+              <article class="gallery-card small-a reveal">
+                <div class="copy">
+                  <span>Interiors</span>
+                  <h3>Warm, quiet luxury</h3>
+                  <p>Great for staging photos, kitchens, or architectural details.</p>
+                </div>
+              </article>
+
+              <article class="gallery-card small-b reveal">
+                <div class="copy">
+                  <span>Neighborhood</span>
+                  <h3>Context sells confidence</h3>
+                  <p>Show streetscape, local amenities, or the overall feel of the market.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonials">
+        <div class="frame">
+          <div class="section-heading reveal">
+            <span class="mini">Client Notes</span>
+            <h2>Trust grows faster when praise sounds specific.</h2>
+            <p>
+              These sample testimonials are written to feel more credible than generic “great service”
+              quotes. They can easily become realtor reviews, developer feedback, or seller case studies.
+            </p>
+          </div>
+
+          <div class="testimonial-grid">
+            <article class="quote-card reveal">
+              <div class="stars">★★★★★</div>
+              <p>“They made a high-stakes purchase feel grounded, paced, and surprisingly clear.”</p>
+              <span>Private buyer, waterfront relocation</span>
+            </article>
+
+            <article class="quote-card reveal">
+              <div class="stars">★★★★★</div>
+              <p>“The launch strategy changed everything. We had stronger attention in week one than in the prior month.”</p>
+              <span>Seller, landmark townhouse</span>
+            </article>
+
+            <article class="quote-card reveal">
+              <div class="stars">★★★★★</div>
+              <p>“They understand design, pricing, and perception at the same time, which is rare.”</p>
+              <span>Development partner, boutique multifamily project</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="frame">
+          <div class="contact-panel reveal">
+            <div>
+              <h2>Ready to turn this into your client’s version?</h2>
+              <p>
+                We can customize the branding, palette, copy, service mix, and imagery direction next.
+                This demo is already structured to become a polished single-page presentation or a live landing page.
+              </p>
+            </div>
+            <a class="button primary" href="mailto:hello@astergrove.example">Request a Design Pass</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="frame footer-grid">
+        <div>Aster Grove Realty Concept</div>
+        <div>Designed for premium real estate storytelling</div>
+        <div><a href="#top">Back to top</a></div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const parallaxLayers = document.querySelectorAll("[data-parallax]");
+    const revealItems = document.querySelectorAll(".reveal");
+
+    const updateParallax = () => {
+      const y = window.scrollY;
+      parallaxLayers.forEach((layer) => {
+        const speed = Number(layer.dataset.parallax || 0);
+        layer.style.transform = "translateY(" + y * speed + "px)";
+      });
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.16 });
+
+    revealItems.forEach((item) => revealObserver.observe(item));
+    updateParallax();
+    window.addEventListener("scroll", updateParallax, { passive: true });
+  </script>
+</body>
+</html>
