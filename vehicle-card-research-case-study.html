@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehicle Card Research | Toyota Case Study</title>
+  <style>
+    :root {
+      --bg: #f7f4ee;
+      --surface: #ffffff;
+      --surface-soft: #ebe7dd;
+      --ink: #17201c;
+      --muted: #59645e;
+      --line: #d7d0c2;
+      --accent: #0f6b63;
+      --accent-dark: #084943;
+      --coral: #d26048;
+      --blue: #315d8c;
+      --yellow: #d59d2f;
+      --shadow: 0 18px 44px rgba(23, 32, 28, 0.1);
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      --serif: Georgia, "Times New Roman", serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -48px;
+      z-index: 100;
+      padding: 10px 14px;
+      border-radius: 4px;
+      background: var(--ink);
+      color: #fff;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(23, 32, 28, 0.1);
+      background: rgba(247, 244, 238, 0.9);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      width: min(1180px, calc(100% - 40px));
+      min-height: 72px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 750;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: var(--ink);
+      color: #fff;
+      flex: 0 0 auto;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-links a {
+      padding: 10px 12px;
+      border-radius: 6px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--ink);
+      background: rgba(15, 107, 99, 0.08);
+      outline: none;
+    }
+
+    .section {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 72px 0 46px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 42px;
+      color: var(--accent-dark);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 980px;
+      margin: 0 0 24px;
+      font-size: clamp(52px, 9vw, 112px);
+      line-height: 0.94;
+      letter-spacing: 0;
+    }
+
+    h1 span {
+      display: block;
+      color: var(--accent);
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    .hero-copy {
+      max-width: 820px;
+      color: var(--muted);
+      font-size: clamp(19px, 2vw, 24px);
+    }
+
+    .metadata {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 1px;
+      margin-top: 42px;
+      border: 1px solid var(--line);
+      background: var(--line);
+    }
+
+    .metadata div {
+      min-height: 116px;
+      padding: 18px;
+      background: var(--surface);
+    }
+
+    .metadata dt {
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .metadata dd {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .hero-figure {
+      margin: 46px 0 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    figure {
+      margin: 0;
+    }
+
+    figcaption {
+      border-top: 1px solid var(--line);
+      padding: 14px 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .page-grid {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 54px;
+      padding: 56px 0 90px;
+      align-items: start;
+    }
+
+    .toc {
+      position: sticky;
+      top: 104px;
+      border-left: 1px solid var(--line);
+      padding-left: 18px;
+    }
+
+    .toc strong {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .toc a {
+      display: block;
+      padding: 7px 0;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .toc a:hover,
+    .toc a:focus-visible {
+      color: var(--accent-dark);
+      outline: none;
+    }
+
+    .mobile-toc {
+      display: none;
+    }
+
+    .content {
+      display: grid;
+      gap: 76px;
+    }
+
+    .case-section {
+      scroll-margin-top: 104px;
+    }
+
+    .section-kicker {
+      margin-bottom: 10px;
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin-bottom: 18px;
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-bottom: 12px;
+      font-size: 24px;
+      line-height: 1.16;
+    }
+
+    .lead {
+      max-width: 820px;
+      color: var(--muted);
+      font-size: 20px;
+    }
+
+    .body-copy {
+      max-width: 820px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .glance-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      padding: 24px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .stat {
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--ink);
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .problem-list,
+    .zone-list,
+    .takeaway-list {
+      display: grid;
+      gap: 12px;
+      padding: 0;
+      margin: 24px 0 0;
+      list-style: none;
+    }
+
+    .problem-list li,
+    .zone-list li,
+    .takeaway-list li {
+      border-left: 3px solid var(--accent);
+      padding: 12px 0 12px 18px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.42);
+    }
+
+    .problem-list strong,
+    .zone-list strong,
+    .takeaway-list strong {
+      color: var(--ink);
+    }
+
+    .figure-card {
+      margin-top: 30px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .step-grid {
+      display: grid;
+      gap: 24px;
+      margin-top: 34px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 82px minmax(0, 1fr);
+      gap: 22px;
+      border-top: 1px solid var(--line);
+      padding-top: 28px;
+    }
+
+    .step-number {
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #fff;
+      font-weight: 850;
+    }
+
+    .confirm {
+      margin-top: 20px;
+      border: 1px dashed rgba(210, 96, 72, 0.8);
+      border-radius: 8px;
+      padding: 18px;
+      background: rgba(210, 96, 72, 0.08);
+    }
+
+    .confirm strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #8d321f;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .confirm p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .tradeoff-grid,
+    .outcome-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .tradeoff-card {
+      min-height: 230px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      background: var(--surface);
+    }
+
+    .tradeoff-card span,
+    .outcome-card span {
+      display: inline-flex;
+      margin-bottom: 24px;
+      color: var(--accent-dark);
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .outcome-card {
+      min-height: 220px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      background: var(--surface);
+    }
+
+    .reflection-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .contact-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: clamp(28px, 5vw, 54px);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .footer {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 1px solid var(--line);
+      padding: 28px 0 36px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .metadata {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .page-grid {
+        grid-template-columns: 1fr;
+        padding-top: 30px;
+      }
+
+      .toc {
+        display: none;
+      }
+
+      .mobile-toc {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 0 0 18px;
+      }
+
+      .mobile-toc a {
+        flex: 0 0 auto;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 8px 12px;
+        color: var(--muted);
+        background: var(--surface);
+        font-size: 13px;
+        font-weight: 750;
+      }
+
+      .glance-grid,
+      .reflection-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tradeoff-grid,
+      .outcome-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      .nav {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .section,
+      .page-grid,
+      .footer {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .hero {
+        padding-top: 42px;
+      }
+
+      h1 {
+        font-size: clamp(44px, 14vw, 72px);
+      }
+
+      .metadata,
+      .stat-grid,
+      .tradeoff-grid,
+      .outcome-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .step {
+        grid-template-columns: 1fr;
+      }
+
+      .content {
+        gap: 58px;
+      }
+
+      .footer {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to case study content</a>
+
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary">
+      <a class="brand" href="ux-portfolio-site.html" aria-label="Back to Jef Chin portfolio">
+        <span class="brand-mark">JC</span>
+        <span>Jef Chin</span>
+      </a>
+      <div class="nav-links">
+        <a href="#glance">At a glance</a>
+        <a href="#approach">Approach</a>
+        <a href="#outcome">Outcome</a>
+        <a href="mailto:hello@jefchin.design">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="section hero" aria-labelledby="page-title">
+      <a class="back-link" href="ux-portfolio-site.html">Back to portfolio</a>
+      <p class="eyebrow">UX case study</p>
+      <h1 id="page-title">Vehicle Card Research <span>for Toyota.</span></h1>
+      <p class="hero-copy">Unifying a fragmented component across a 10-surface digital ecosystem, from inventory search and comparison flows to dealer experiences and the vehicle configurator.</p>
+
+      <dl class="metadata" aria-label="Project details">
+        <div>
+          <dt>Client</dt>
+          <dd>Toyota</dd>
+        </div>
+        <div>
+          <dt>Project</dt>
+          <dd>Vehicle Card Research</dd>
+        </div>
+        <div>
+          <dt>Role</dt>
+          <dd>Content to confirm</dd>
+        </div>
+        <div>
+          <dt>Timeline</dt>
+          <dd>Content to confirm</dd>
+        </div>
+        <div>
+          <dt>Team</dt>
+          <dd>Content to confirm</dd>
+        </div>
+        <div>
+          <dt>Tools</dt>
+          <dd>Figma, FigJam</dd>
+        </div>
+      </dl>
+
+      <figure class="hero-figure">
+        <img src="assets/vehicle-card-rev2-overview.png" alt="Overview of the Rev2 Figma section showing About, Disclaimers, Vehicle Card Breakdown, and Next Steps rows.">
+        <figcaption>Selected Rev2 Figma section showing the full vehicle-card research deck structure.</figcaption>
+      </figure>
+    </section>
+
+    <div class="page-grid" id="content">
+      <aside class="toc" aria-label="Case study navigation">
+        <strong>Case study</strong>
+        <a href="#glance">At a glance</a>
+        <a href="#challenge">Challenge</a>
+        <a href="#approach">Approach</a>
+        <a href="#tradeoffs">Tradeoffs</a>
+        <a href="#outcome">Outcome</a>
+        <a href="#reflection">Reflection</a>
+      </aside>
+
+      <div>
+        <nav class="mobile-toc" aria-label="Case study sections">
+          <a href="#glance">Glance</a>
+          <a href="#challenge">Challenge</a>
+          <a href="#approach">Approach</a>
+          <a href="#tradeoffs">Tradeoffs</a>
+          <a href="#outcome">Outcome</a>
+          <a href="#reflection">Reflection</a>
+        </nav>
+
+        <div class="content">
+          <section class="case-section" id="glance" aria-labelledby="glance-title">
+            <p class="section-kicker">At a glance</p>
+            <h2 id="glance-title">A repeated pattern with no shared source of truth.</h2>
+            <div class="glance-grid">
+              <div class="card">
+                <p class="lead">The vehicle card is one of the most repeated, and most inconsistent, patterns across Toyota's digital ecosystem. It appears on the home page, inside inventory search, across comparison flows, inside dealer sites, and in the vehicle configurator, each time with different content, styling, and interaction rules.</p>
+                <p class="body-copy">This project mapped every variant, decomposed the card into its atomic parts, and produced a unified specification the design system team could ship as a single, configurable component.</p>
+              </div>
+              <div class="card">
+                <p class="eyebrow">Project type</p>
+                <p class="body-copy">Design systems research, cross-product audit, component specification.</p>
+                <div class="stat-grid">
+                  <div class="stat">
+                    <strong>10</strong>
+                    <span>surfaces audited</span>
+                  </div>
+                  <div class="stat">
+                    <strong>12</strong>
+                    <span>component zones identified</span>
+                  </div>
+                  <div class="stat">
+                    <strong>1</strong>
+                    <span>configurable system target</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="case-section" id="challenge" aria-labelledby="challenge-title">
+            <p class="section-kicker">The challenge</p>
+            <h2 id="challenge-title">Ten surfaces, ten different vehicle cards.</h2>
+            <p class="lead">The vehicle card is the workhorse of Toyota's digital ecosystem. It is the component users see whenever they browse, compare, configure, or shop. Across the 10 digital surfaces where it lives, no two implementations were alike.</p>
+            <ul class="problem-list">
+              <li><strong>Brand inconsistency.</strong> A user configuring a vehicle on one page, then comparing options on another, saw what looked like two different products from two different brands.</li>
+              <li><strong>Engineering duplication.</strong> Each surface team had built its own variant. New features like EV badging or incentive banners had to be implemented repeatedly.</li>
+              <li><strong>No shared vocabulary.</strong> Product teams argued about what a vehicle card should show without a common framework for discussing trade-offs.</li>
+            </ul>
+            <div class="confirm">
+              <strong>Content to confirm</strong>
+              <p>Add any specific metrics on the pain: duplicated engineering hours, bug tickets, failed user testing moments, accessibility issues, or a directional number such as component debt share.</p>
+            </div>
+          </section>
+
+          <section class="case-section" id="approach" aria-labelledby="approach-title">
+            <p class="section-kicker">The approach</p>
+            <h2 id="approach-title">Audit first. Decompose second. Systematize third.</h2>
+            <p class="lead">The instinct on a project like this is to jump to the new design. I resisted that. If we did not first understand why the card had diverged across 10 surfaces, any new unified version would get rejected by teams who felt their edge cases were not represented.</p>
+
+            <div class="step-grid">
+              <article class="step">
+                <span class="step-number">01</span>
+                <div>
+                  <h3>Cross-surface audit</h3>
+                  <p class="body-copy">I catalogued every instance of the vehicle card across Accessories, Brochures, Compare, All Vehicles, Awards, Search Inventory, Smartpath, VCR, Dealer Site, and Home Page Vehicle Selector. For each, I captured the rendered card, documented the content it included, noted the interaction model, and flagged unique constraints.</p>
+                  <figure class="figure-card">
+                    <img src="assets/vehicle-card-audit-grid.png" alt="Audit grid of vehicle card examples across Accessories, Brochures, Compare, All vehicles, Awards, Search inventory, Smartpath, VCR, Dealer site, and Home page vehicle selector.">
+                    <figcaption>Audit grid: 10 vehicle card instances across Toyota surfaces.</figcaption>
+                  </figure>
+                  <p class="body-copy">What I found was not chaos. It was legitimate divergence. Compare optimized for dense side-by-side scan. The home selector optimized for emotional hero imagery. Smartpath optimized for dealer handoff. A unified component could not erase those differences. It had to absorb them as configuration.</p>
+                </div>
+              </article>
+
+              <article class="step">
+                <span class="step-number">02</span>
+                <div>
+                  <h3>Component breakdown</h3>
+                  <p class="body-copy">I decomposed the card into atomic parts so every surface could express its variant as a composition, not a reinvention. The breakdown produced discrete zones, each with its own rules, variants, and optionality.</p>
+                  <ul class="zone-list">
+                    <li><strong>Image area.</strong> Aspect ratio, vehicle angle, and background treatment.</li>
+                    <li><strong>Decorator.</strong> Visual layer for color swatches, trim accents, or overlays.</li>
+                    <li><strong>Vehicle info.</strong> Year, make, model, trim, and core metadata.</li>
+                    <li><strong>CTA.</strong> Primary action, with rules for when each action type applies.</li>
+                    <li><strong>Badge and banner.</strong> EV, new-for-year, incentive, availability, award, or recall callouts.</li>
+                    <li><strong>Subframe, stepper, and selection state.</strong> Context-specific content, flow progression, hover, focus, selected, and disabled behavior.</li>
+                  </ul>
+                  <figure class="figure-card">
+                    <img src="assets/vehicle-card-orientation.png" alt="Figma slide showing vertical and horizontal vehicle card orientations using the same foundation building blocks.">
+                    <figcaption>Orientation slide: vertical and horizontal variants use the same foundation building blocks.</figcaption>
+                  </figure>
+                </div>
+              </article>
+
+              <article class="step">
+                <span class="step-number">03</span>
+                <div>
+                  <h3>Unified specification</h3>
+                  <p class="body-copy">The deliverable tied the audit and breakdown together into a single reference the design system team could adopt and product teams could build against. Every divergence from the audit was accounted for, not eliminated, but represented as a configuration of a single component.</p>
+                  <div class="confirm">
+                    <strong>Content to confirm</strong>
+                    <p>Clarify the exact system output: Figma library, spec document, tokens, guidelines, engineering API, or a combination of these.</p>
+                  </div>
+                  <figure class="figure-card">
+                    <img src="assets/vehicle-card-working-session.png" alt="Figma slide showing a working session with developers to establish shared CSS and design tokens.">
+                    <figcaption>Developer working session: aligning shared CSS and token strategy across all vehicle cards.</figcaption>
+                  </figure>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="case-section" id="tradeoffs" aria-labelledby="tradeoffs-title">
+            <p class="section-kicker">Tradeoffs</p>
+            <h2 id="tradeoffs-title">The hard calls.</h2>
+            <p class="lead">This section should capture the moments where the system had to balance consistency, local surface needs, engineering complexity, and release scope.</p>
+            <div class="confirm">
+              <strong>Content to confirm</strong>
+              <p>Pick 2 to 3 real tradeoffs: where a surface team wanted to keep a unique variant, where v1 scope had to narrow, or where configuration risked becoming prop sprawl.</p>
+            </div>
+            <div class="tradeoff-grid">
+              <article class="tradeoff-card">
+                <span>Tradeoff 1</span>
+                <h3>Variant or separate component?</h3>
+                <p class="body-copy">Example to replace: keep the home-page hero card as a variant because the downstream metadata and CTA rules matched the shared card model.</p>
+              </article>
+              <article class="tradeoff-card">
+                <span>Tradeoff 2</span>
+                <h3>What belongs in v1?</h3>
+                <p class="body-copy">Example to replace: defer accessories-specific styling from v1 if that surface was being rebuilt on a different stack.</p>
+              </article>
+              <article class="tradeoff-card">
+                <span>Tradeoff 3</span>
+                <h3>Configuration depth</h3>
+                <p class="body-copy">Example to replace: choose a configurable badge slot instead of enumerating every current badge type.</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="case-section" id="outcome" aria-labelledby="outcome-title">
+            <p class="section-kicker">Outcome</p>
+            <h2 id="outcome-title">What shipped, what changed.</h2>
+            <p class="lead">The current draft needs final outcome evidence. Until those details are confirmed, the page keeps the outcome area explicit and easy to update.</p>
+            <div class="outcome-grid">
+              <article class="outcome-card">
+                <span>Adoption</span>
+                <h3>Surfaces migrated</h3>
+                <p class="body-copy">Content to confirm: which surfaces adopted the unified component, how many migrated, and over what timeline.</p>
+              </article>
+              <article class="outcome-card">
+                <span>Engineering</span>
+                <h3>Duplication reduced</h3>
+                <p class="body-copy">Content to confirm: developer hours saved, implementations consolidated, shared tokens adopted, or variants reduced.</p>
+              </article>
+              <article class="outcome-card">
+                <span>Brand and user impact</span>
+                <h3>Consistency improved</h3>
+                <p class="body-copy">Content to confirm: testing evidence, brand review feedback, analytics lift, or accessibility improvements after migration.</p>
+              </article>
+            </div>
+            <div class="confirm">
+              <strong>Content to confirm</strong>
+              <p>Add recognition or cascade effects: whether this framework influenced future audits or helped consolidate other fragmented components.</p>
+            </div>
+          </section>
+
+          <section class="case-section" id="reflection" aria-labelledby="reflection-title">
+            <p class="section-kicker">Reflection</p>
+            <h2 id="reflection-title">What I would take with me.</h2>
+            <div class="reflection-grid">
+              <div class="card">
+                <h3>What I would do differently</h3>
+                <p class="body-copy">Content to confirm: two or three honest reflections, such as teams you would involve earlier, constraints you discovered late, or documentation choices you would tighten.</p>
+              </div>
+              <div class="card">
+                <h3>Three takeaways</h3>
+                <ul class="takeaway-list">
+                  <li><strong>Audit earns consensus.</strong> A unified spec that arrives without an audit gets rejected. A unified spec that arrives after the audit gets adopted.</li>
+                  <li><strong>Systematize configuration, not content.</strong> The right abstraction is not what the card looks like. It is what choices the card lets a team make.</li>
+                  <li><strong>The framework outlives the artifact.</strong> The breakdown approach gave the design system team a reusable method for future fragmented components.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="case-section" aria-labelledby="contact-title">
+            <div class="contact-panel">
+              <p class="section-kicker">Contact</p>
+              <h2 id="contact-title">Jeff Chin</h2>
+              <p class="lead">Portfolio URL, email, and LinkedIn links are ready to replace when the final contact details are confirmed.</p>
+              <p class="body-copy"><a href="mailto:hello@jefchin.design">hello@jefchin.design</a> · <a href="ux-portfolio-site.html">Portfolio home</a> · <span>LinkedIn to confirm</span></p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span>Toyota Vehicle Card Research</span>
+    <span>Standalone UX case study HTML prototype.</span>
+  </footer>
+</body>
+</html>
