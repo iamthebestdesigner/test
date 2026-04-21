@@ -3,21 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jef Chin | UX Portfolio</title>
+  <title>Jeff Chin | UX & Design Systems</title>
   <style>
     :root {
-      --bg: #f7f4ee;
-      --surface: #ffffff;
-      --surface-soft: #ebe7dd;
-      --ink: #17201c;
-      --muted: #59645e;
-      --line: #d7d0c2;
+      --bg: #f8f5ee;
+      --paper: #fffdf8;
+      --ink: #171b18;
+      --muted: #666b66;
+      --line: #ded6c8;
       --accent: #0f6b63;
-      --accent-dark: #084943;
-      --coral: #d26048;
+      --accent-soft: #dcebe7;
+      --warm: #d26048;
       --blue: #315d8c;
-      --yellow: #d59d2f;
-      --shadow: 0 18px 44px rgba(23, 32, 28, 0.1);
+      --shadow: 0 20px 50px rgba(23, 27, 24, 0.08);
       --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
       --serif: Georgia, "Times New Roman", serif;
     }
@@ -44,39 +42,19 @@
       text-decoration: none;
     }
 
-    button {
-      font: inherit;
+    .site-shell {
+      background: var(--bg);
     }
 
-    .skip-link {
-      position: absolute;
-      left: 16px;
-      top: -48px;
-      z-index: 100;
-      padding: 10px 14px;
-      border-radius: 4px;
-      background: var(--ink);
-      color: #fff;
-      transition: top 0.2s ease;
-    }
-
-    .skip-link:focus {
-      top: 16px;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      border-bottom: 1px solid rgba(23, 32, 28, 0.1);
-      background: rgba(247, 244, 238, 0.9);
-      backdrop-filter: blur(18px);
+    .page {
+      width: min(1160px, calc(100% - 40px));
+      margin: 0 auto;
     }
 
     .nav {
-      width: min(1180px, calc(100% - 40px));
-      margin: 0 auto;
-      min-height: 72px;
+      position: relative;
+      z-index: 5;
+      min-height: 76px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -87,75 +65,135 @@
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      min-width: 0;
-      font-weight: 750;
+      font-weight: 800;
     }
 
-    .brand-mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
+    .mark {
+      width: 38px;
+      height: 38px;
       display: grid;
       place-items: center;
-      background: var(--ink);
-      color: #fff;
+      border-radius: 50%;
+      background: #fff;
+      color: var(--ink);
+      font-size: 13px;
       letter-spacing: 0;
-      flex: 0 0 auto;
     }
 
-    .brand span:last-child {
-      white-space: nowrap;
-    }
-
-    .nav-links {
+    .links {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
 
-    .nav-links a {
+    .links a {
       padding: 10px 12px;
-      border-radius: 6px;
-      color: var(--muted);
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.72);
       font-size: 14px;
-      font-weight: 650;
+      font-weight: 700;
     }
 
-    .nav-links a:hover,
-    .nav-links a:focus-visible {
-      color: var(--ink);
-      background: rgba(15, 107, 99, 0.08);
+    .links a:hover,
+    .links a:focus-visible {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.12);
       outline: none;
     }
 
-    .contact-link {
-      border: 1px solid var(--ink);
-      color: var(--ink) !important;
-    }
-
-    main {
-      overflow: hidden;
-    }
-
-    .section {
-      width: min(1180px, calc(100% - 40px));
-      margin: 0 auto;
-    }
-
     .hero {
-      min-height: calc(100vh - 72px);
+      position: relative;
+      min-height: 100vh;
+      margin-top: -76px;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.76fr);
-      gap: 48px;
+      align-items: end;
+      overflow: hidden;
+      background: #030303;
+      color: #fff;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      background-image: url("assets/jeff-portrait-editorial.png");
+      background-size: auto 130%;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      opacity: 0.96;
+      transform: scale(1.14);
+      transform-origin: 50% 50%;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(circle at 50% 44%, rgba(255, 255, 255, 0.08), transparent 30%),
+        linear-gradient(90deg, #030303 0%, rgba(3, 3, 3, 0.55) 20%, rgba(3, 3, 3, 0.08) 50%, rgba(3, 3, 3, 0.55) 82%, #030303 100%),
+        linear-gradient(0deg, #030303 0%, rgba(3, 3, 3, 0) 28%, rgba(3, 3, 3, 0.26) 100%);
+    }
+
+    .hero-inner {
+      width: min(1160px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 148px 0 78px;
+    }
+
+    .marquee {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: -1;
+      display: flex;
+      overflow: hidden;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0.92;
+    }
+
+    .marquee-track {
+      display: flex;
       align-items: center;
-      padding: 64px 0 42px;
+      gap: 5vw;
+      min-width: max-content;
+      animation: marqueeMove 28s linear infinite;
+    }
+
+    .marquee span {
+      color: rgba(255, 255, 255, 0.92);
+      font-size: clamp(82px, 15vw, 220px);
+      font-weight: 850;
+      line-height: 0.86;
+      letter-spacing: 0;
+    }
+
+    .marquee .outline {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255, 255, 255, 0.54);
+      text-stroke: 1px rgba(255, 255, 255, 0.54);
+    }
+
+    @keyframes marqueeMove {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
     }
 
     .eyebrow {
       margin: 0 0 18px;
-      color: var(--accent-dark);
+      color: rgba(255, 255, 255, 0.72);
       font-size: 13px;
-      font-weight: 800;
+      font-weight: 850;
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
@@ -168,31 +206,29 @@
     }
 
     h1 {
-      max-width: 840px;
-      margin-bottom: 22px;
-      font-size: clamp(48px, 8vw, 104px);
+      max-width: 780px;
+      margin-bottom: 24px;
+      font-size: clamp(52px, 8vw, 106px);
       line-height: 0.94;
       letter-spacing: 0;
     }
 
     h1 span {
-      display: block;
-      color: var(--accent);
+      color: #fff;
       font-family: var(--serif);
       font-style: italic;
       font-weight: 500;
     }
 
-    .hero-copy {
-      max-width: 690px;
-      color: var(--muted);
-      font-size: clamp(18px, 2vw, 22px);
+    .intro {
+      max-width: 660px;
+      color: rgba(255, 255, 255, 0.74);
+      font-size: clamp(19px, 2vw, 24px);
     }
 
-    .hero-actions {
+    .actions {
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
       gap: 12px;
       margin-top: 30px;
     }
@@ -202,22 +238,29 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
       border: 1px solid var(--ink);
-      border-radius: 6px;
-      padding: 12px 18px;
+      border-radius: 999px;
+      padding: 12px 20px;
       background: var(--ink);
       color: #fff;
-      font-weight: 750;
-      cursor: pointer;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      font-weight: 800;
     }
 
-    .button:hover,
-    .button:focus-visible {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px rgba(23, 32, 28, 0.15);
-      outline: none;
+    .hero .button {
+      border-color: #fff;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .hero .button.secondary {
+      background: transparent;
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.42);
+    }
+
+    .hero .button.secondary:hover,
+    .hero .button.secondary:focus-visible {
+      background: rgba(255, 255, 255, 0.12);
     }
 
     .button.secondary {
@@ -225,46 +268,91 @@
       color: var(--ink);
     }
 
-    .hero-meta {
+    .portrait-card {
+      display: none;
+    }
+
+
+    section {
+      padding: 74px 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.62fr) minmax(280px, 0.38fr);
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      margin-bottom: 0;
+      font-size: clamp(34px, 5vw, 66px);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .section-head p,
+    .body-copy {
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .expertise-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin-top: 42px;
-      max-width: 720px;
+      gap: 1px;
+      border: 1px solid var(--line);
+      background: var(--line);
     }
 
-    .metric {
-      border-top: 1px solid var(--line);
-      padding-top: 14px;
+    .expertise {
+      min-height: 260px;
+      padding: 26px;
+      background: var(--paper);
     }
 
-    .metric strong {
+    .expertise span {
       display: block;
-      margin-bottom: 4px;
-      font-size: 22px;
-      line-height: 1.1;
-    }
-
-    .metric span {
-      color: var(--muted);
+      margin-bottom: 54px;
+      color: var(--accent);
       font-size: 13px;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
-    .workbench {
-      position: relative;
-      min-height: 600px;
+    .expertise h3 {
+      margin-bottom: 12px;
+      font-size: 24px;
+      line-height: 1.14;
+    }
+
+    .work-card {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+      gap: 34px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: var(--surface);
+      padding: clamp(24px, 4vw, 44px);
+      background: var(--paper);
       box-shadow: var(--shadow);
+      align-items: center;
+    }
+
+    .visual {
+      min-height: 360px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
       overflow: hidden;
     }
 
-    .workbench-top {
-      height: 48px;
+    .visual-top {
+      height: 44px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
       padding: 0 16px;
       border-bottom: 1px solid var(--line);
       background: #fbfaf6;
@@ -274,487 +362,128 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background: var(--coral);
+      background: var(--warm);
     }
 
     .dot:nth-child(2) {
-      background: var(--yellow);
+      background: #d59d2f;
     }
 
     .dot:nth-child(3) {
       background: var(--accent);
     }
 
-    .workbench-stage {
-      position: relative;
-      height: 552px;
+    .visual-body {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
       padding: 24px;
       background:
-        linear-gradient(rgba(23, 32, 28, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(23, 32, 28, 0.05) 1px, transparent 1px);
+        linear-gradient(rgba(23, 27, 24, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(23, 27, 24, 0.05) 1px, transparent 1px);
       background-size: 28px 28px;
     }
 
-    .panel {
-      position: absolute;
-      border: 1px solid rgba(23, 32, 28, 0.13);
+    .mini-card {
+      min-height: 128px;
+      border: 1px solid rgba(23, 27, 24, 0.12);
       border-radius: 8px;
-      background: #fff;
-      box-shadow: 0 14px 28px rgba(23, 32, 28, 0.1);
-      overflow: hidden;
-    }
-
-    .panel-large {
-      left: 28px;
-      top: 34px;
-      width: 62%;
-      min-height: 288px;
-    }
-
-    .panel-small {
-      right: 28px;
-      top: 84px;
-      width: 36%;
-      min-height: 210px;
-    }
-
-    .panel-map {
-      left: 70px;
-      bottom: 42px;
-      width: 78%;
-      min-height: 170px;
-    }
-
-    .panel-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--line);
-      font-weight: 800;
-      font-size: 13px;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 28px;
-      border-radius: 999px;
-      padding: 4px 10px;
-      background: rgba(15, 107, 99, 0.1);
-      color: var(--accent-dark);
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .mock-content {
-      padding: 18px;
-    }
-
-    .line {
-      height: 9px;
-      border-radius: 99px;
-      margin-bottom: 10px;
-      background: var(--surface-soft);
-    }
-
-    .line:nth-child(1) {
-      width: 74%;
-      background: rgba(15, 107, 99, 0.22);
-    }
-
-    .line:nth-child(2) {
-      width: 92%;
-    }
-
-    .line:nth-child(3) {
-      width: 54%;
-    }
-
-    .chart {
-      height: 116px;
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      align-items: end;
-      gap: 8px;
-      margin-top: 22px;
-    }
-
-    .bar {
-      border-radius: 5px 5px 0 0;
-      background: var(--accent);
-    }
-
-    .bar:nth-child(2n) {
-      background: var(--blue);
-    }
-
-    .bar:nth-child(3n) {
-      background: var(--coral);
-    }
-
-    .map-row {
-      display: grid;
-      grid-template-columns: 110px 1fr;
-      gap: 14px;
-      align-items: center;
-      margin-bottom: 14px;
-    }
-
-    .map-label {
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 750;
-      text-transform: uppercase;
-    }
-
-    .map-track {
-      height: 14px;
-      border-radius: 999px;
-      background: var(--surface-soft);
-      overflow: hidden;
-    }
-
-    .map-fill {
-      display: block;
-      height: 100%;
-      border-radius: inherit;
-      background: var(--accent);
-    }
-
-    .case-intro,
-    .about,
-    .contact {
-      padding: 90px 0;
-    }
-
-    .section-heading {
-      display: grid;
-      grid-template-columns: minmax(0, 0.55fr) minmax(280px, 0.45fr);
-      gap: 40px;
-      align-items: end;
-      margin-bottom: 30px;
-    }
-
-    h2 {
-      margin-bottom: 0;
-      font-size: clamp(34px, 5vw, 64px);
-      line-height: 1;
-      letter-spacing: 0;
-    }
-
-    .section-heading p {
-      margin-bottom: 0;
-      color: var(--muted);
-      font-size: 17px;
-    }
-
-    .filter-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 22px;
-    }
-
-    .filter-button {
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 9px 14px;
-      background: transparent;
-      color: var(--muted);
-      font-weight: 750;
-      cursor: pointer;
-    }
-
-    .filter-button[aria-pressed="true"] {
-      border-color: var(--accent);
-      background: var(--accent);
-      color: #fff;
-    }
-
-    .case-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .case-card {
-      min-height: 460px;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--surface);
-      overflow: hidden;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .case-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow);
-    }
-
-    .case-visual {
-      height: 210px;
-      padding: 18px;
-      border-bottom: 1px solid var(--line);
-      background: #e8dfd2;
-    }
-
-    .case-visual.product {
-      background: linear-gradient(135deg, #e7efe9 0%, #b7d8d0 52%, #315d8c 100%);
-    }
-
-    .case-visual.system {
-      background: linear-gradient(135deg, #fff0df 0%, #d59d2f 48%, #d26048 100%);
-    }
-
-    .case-visual.research {
-      background: linear-gradient(135deg, #ece8ff 0%, #a6bdd8 48%, #0f6b63 100%);
-    }
-
-    .device {
-      width: 100%;
-      height: 100%;
-      border: 1px solid rgba(23, 32, 28, 0.18);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.9);
-      box-shadow: 0 18px 32px rgba(23, 32, 28, 0.14);
       padding: 16px;
+      background: #fff;
+      box-shadow: 0 12px 24px rgba(23, 27, 24, 0.08);
     }
 
-    .device-grid {
-      display: grid;
-      grid-template-columns: 0.34fr 1fr;
-      gap: 12px;
-      height: 100%;
-    }
-
-    .sidebar-lines,
-    .content-lines {
-      display: grid;
-      gap: 8px;
-      align-content: start;
-    }
-
-    .tiny-line {
+    .mini-line {
       height: 10px;
-      border-radius: 99px;
-      background: rgba(23, 32, 28, 0.12);
+      border-radius: 999px;
+      margin-bottom: 10px;
+      background: #dfe2de;
     }
 
-    .tiny-line.strong {
+    .mini-line.strong {
+      width: 62%;
       background: var(--accent);
     }
 
-    .tile-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 12px;
+    .mini-vehicle {
+      height: 54px;
+      margin-top: 18px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #dfe7e4, #7f9ca8);
     }
 
-    .tile {
-      min-height: 42px;
-      border-radius: 6px;
-      background: rgba(23, 32, 28, 0.1);
+    .work-card h3 {
+      margin-bottom: 14px;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1;
     }
 
-    .case-body {
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-      padding: 22px;
-    }
-
-    .case-body h3 {
-      margin-bottom: 10px;
-      font-size: 24px;
-      line-height: 1.12;
-      letter-spacing: 0;
-    }
-
-    .case-body p {
-      color: var(--muted);
-    }
-
-    .case-meta {
+    .tags {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin: auto 0 20px;
+      margin: 24px 0 28px;
     }
 
     .tag {
       border: 1px solid var(--line);
       border-radius: 999px;
-      padding: 5px 9px;
+      padding: 7px 10px;
       color: var(--muted);
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 750;
     }
 
-    .text-link {
-      width: fit-content;
-      color: var(--accent-dark);
-      font-weight: 850;
-      cursor: pointer;
-    }
-
-    .text-link:hover,
-    .text-link:focus-visible {
-      text-decoration: underline;
-      outline: none;
-    }
-
-    .capabilities {
-      padding: 84px 0;
-      background: var(--ink);
-      color: #fff;
-    }
-
-    .capabilities .section-heading p,
-    .capability p {
-      color: rgba(255, 255, 255, 0.72);
-    }
-
-    .capability-grid {
+    .about {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1px;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      background: rgba(255, 255, 255, 0.18);
-    }
-
-    .capability {
-      min-height: 250px;
-      padding: 24px;
-      background: var(--ink);
-    }
-
-    .capability-number {
-      display: block;
-      margin-bottom: 46px;
-      color: rgba(255, 255, 255, 0.48);
-      font-weight: 800;
-    }
-
-    .capability h3 {
-      margin-bottom: 12px;
-      font-size: 21px;
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: minmax(300px, 0.42fr) minmax(0, 1fr);
+      grid-template-columns: 0.42fr 0.58fr;
       gap: 46px;
       align-items: start;
     }
 
-    .portrait {
-      min-height: 520px;
+    .about-panel {
       border: 1px solid var(--line);
       border-radius: 8px;
-      background:
-        radial-gradient(circle at 68% 30%, rgba(210, 96, 72, 0.3), transparent 30%),
-        linear-gradient(145deg, #efe6d9, #b7d8d0 56%, #315d8c);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      position: relative;
+      padding: 28px;
+      background: var(--paper);
     }
 
-    .portrait-card {
-      position: absolute;
-      left: 24px;
-      right: 24px;
-      bottom: 24px;
-      border: 1px solid rgba(255, 255, 255, 0.36);
-      border-radius: 8px;
-      padding: 18px;
-      background: rgba(255, 255, 255, 0.82);
-      backdrop-filter: blur(14px);
-    }
-
-    .portrait-card strong {
+    .about-panel strong {
       display: block;
-      margin-bottom: 6px;
-      font-size: 20px;
-    }
-
-    .portrait-card span {
-      color: var(--muted);
-    }
-
-    .about-copy {
-      max-width: 720px;
-    }
-
-    .about-copy h2 {
-      margin-bottom: 24px;
+      margin-bottom: 10px;
+      font-size: 22px;
     }
 
     .about-copy p {
-      color: var(--muted);
-      font-size: 18px;
+      max-width: 720px;
     }
 
-    .timeline {
-      display: grid;
-      gap: 14px;
-      margin-top: 34px;
+    .contact {
+      padding-bottom: 96px;
     }
 
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 130px 1fr;
-      gap: 20px;
-      border-top: 1px solid var(--line);
-      padding-top: 16px;
-    }
-
-    .timeline-item time {
-      color: var(--accent-dark);
-      font-weight: 850;
-    }
-
-    .timeline-item h3 {
-      margin-bottom: 4px;
-      font-size: 18px;
-    }
-
-    .timeline-item p {
-      margin-bottom: 0;
-      font-size: 15px;
-    }
-
-    .contact-panel {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 30px;
-      align-items: end;
+    .contact-card {
       border: 1px solid var(--line);
       border-radius: 8px;
-      padding: clamp(28px, 5vw, 54px);
-      background: var(--surface);
-      box-shadow: var(--shadow);
+      padding: clamp(28px, 5vw, 56px);
+      background: var(--ink);
+      color: #fff;
     }
 
-    .contact-panel h2 {
-      margin-bottom: 16px;
+    .contact-card p {
+      max-width: 720px;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 19px;
     }
 
-    .contact-panel p {
-      max-width: 680px;
-      margin-bottom: 0;
-      color: var(--muted);
-      font-size: 18px;
+    .contact-card .button {
+      margin-top: 18px;
+      border-color: #fff;
+      background: #fff;
+      color: var(--ink);
     }
 
-    .footer {
-      width: min(1180px, calc(100% - 40px));
-      margin: 0 auto;
+    footer {
       display: flex;
       justify-content: space-between;
       gap: 20px;
@@ -764,619 +493,195 @@
       font-size: 14px;
     }
 
-    .modal {
-      position: fixed;
-      inset: 0;
-      z-index: 50;
-      display: none;
-      place-items: center;
-      padding: 20px;
-      background: rgba(23, 32, 28, 0.5);
-    }
-
-    .modal.is-open {
-      display: grid;
-    }
-
-    .modal-panel {
-      width: min(760px, 100%);
-      max-height: min(760px, calc(100vh - 40px));
-      overflow: auto;
-      border-radius: 8px;
-      background: var(--surface);
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: start;
-      gap: 20px;
-      border-bottom: 1px solid var(--line);
-      padding: 24px;
-    }
-
-    .modal-title {
-      margin-bottom: 6px;
-      font-size: 32px;
-      line-height: 1.08;
-    }
-
-    .modal-kicker {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .icon-button {
-      width: 40px;
-      height: 40px;
-      flex: 0 0 auto;
-      display: inline-grid;
-      place-items: center;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      background: transparent;
-      color: var(--ink);
-      cursor: pointer;
-      font-size: 22px;
-      line-height: 1;
-    }
-
-    .modal-body {
-      display: grid;
-      gap: 20px;
-      padding: 24px;
-    }
-
-    .modal-section {
-      border-top: 1px solid var(--line);
-      padding-top: 18px;
-    }
-
-    .modal-section:first-child {
-      border-top: 0;
-      padding-top: 0;
-    }
-
-    .modal-section h4 {
-      margin: 0 0 8px;
-      font-size: 14px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .modal-section p {
-      margin-bottom: 0;
-      color: var(--muted);
-    }
-
-    @media (max-width: 980px) {
+    @media (max-width: 900px) {
       .hero,
-      .section-heading,
-      .about-grid,
-      .contact-panel {
+      .section-head,
+      .work-card,
+      .about {
         grid-template-columns: 1fr;
       }
 
-      .hero {
-        padding-top: 42px;
+      .hero::before {
+        background-size: auto 112%;
+        background-position: 50% 50%;
+        opacity: 0.7;
+        transform: scale(1.04);
       }
 
-      .workbench {
-        min-height: 520px;
-      }
-
-      .workbench-stage {
-        height: 472px;
-      }
-
-      .case-grid,
-      .capability-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .contact-panel {
-        align-items: start;
+      .hero-inner {
+        padding-top: 160px;
       }
     }
 
-    @media (max-width: 720px) {
-      .nav {
-        width: min(100% - 28px, 1180px);
+    @media (max-width: 640px) {
+      .page {
+        width: min(100% - 28px, 1160px);
       }
 
-      .nav-links {
+      .links {
         display: none;
       }
 
-      .section,
-      .footer {
-        width: min(100% - 28px, 1180px);
-      }
-
-      .hero {
-        min-height: auto;
-        padding: 38px 0 28px;
-      }
-
       h1 {
-        font-size: clamp(44px, 14vw, 70px);
+        font-size: clamp(44px, 14vw, 72px);
       }
 
-      .hero-meta,
-      .case-grid,
-      .capability-grid {
+      section {
+        padding: 56px 0;
+      }
+
+      .visual-body {
         grid-template-columns: 1fr;
       }
 
-      .workbench {
-        min-height: 460px;
-      }
-
-      .workbench-stage {
-        height: 412px;
-        padding: 14px;
-      }
-
-      .panel-large {
-        left: 14px;
-        top: 20px;
-        width: 72%;
-      }
-
-      .panel-small {
-        right: 14px;
-        top: 112px;
-        width: 48%;
-      }
-
-      .panel-map {
-        left: 24px;
-        right: 14px;
-        bottom: 22px;
-        width: auto;
-      }
-
-      .map-row {
-        grid-template-columns: 76px 1fr;
-      }
-
-      .case-intro,
-      .about,
-      .contact {
-        padding: 58px 0;
-      }
-
-      .capabilities {
-        padding: 58px 0;
-      }
-
-      .timeline-item {
-        grid-template-columns: 1fr;
-        gap: 8px;
-      }
-
-      .footer {
+      footer {
         flex-direction: column;
       }
     }
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#work">Skip to selected work</a>
-
-  <header class="site-header">
-    <nav class="nav" aria-label="Primary">
-      <a class="brand" href="#top" aria-label="Jef Chin home">
-        <span class="brand-mark">JC</span>
-        <span>Jef Chin</span>
-      </a>
-      <div class="nav-links">
-        <a href="#work">Work</a>
-        <a href="#capabilities">Capabilities</a>
-        <a href="#about">About</a>
-        <a class="contact-link" href="mailto:hello@jefchin.design">Contact</a>
-      </div>
-    </nav>
-  </header>
-
-  <main id="top">
-    <section class="section hero" aria-labelledby="hero-title">
-      <div>
-        <p class="eyebrow">Product design portfolio</p>
-        <h1 id="hero-title">UX for teams that need clarity, speed, and craft. <span>All at once.</span></h1>
-        <p class="hero-copy">I design systems, workflows, and product experiences that turn messy requirements into interfaces people can actually use. This portfolio is a flexible starter for your case studies, process, and outcomes.</p>
-        <div class="hero-actions">
-          <a class="button" href="#work">View work</a>
-          <a class="button secondary" href="mailto:hello@jefchin.design">Start a conversation</a>
+  <div class="site-shell">
+    <header>
+      <nav class="page nav" aria-label="Primary navigation">
+        <a class="brand" href="#top" aria-label="Jeff Chin home">
+          <span class="mark">JC</span>
+          <span>Jeff Chin</span>
+        </a>
+        <div class="links">
+          <a href="#work">Work</a>
+          <a href="#expertise">Expertise</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
         </div>
-        <div class="hero-meta" aria-label="Portfolio highlights">
-          <div class="metric">
-            <strong>12+</strong>
-            <span>product and design system launches</span>
-          </div>
-          <div class="metric">
-            <strong>4.8x</strong>
-            <span>faster handoff through reusable patterns</span>
-          </div>
-          <div class="metric">
-            <strong>0 to 1</strong>
-            <span>research, strategy, flows, and UI</span>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="intro-title">
+        <div class="marquee" aria-hidden="true">
+          <div class="marquee-track">
+            <span>UX DESIGNER</span>
+            <span class="outline">DESIGN SYSTEMS</span>
+            <span>PRODUCT CLARITY</span>
+            <span class="outline">UX DESIGNER</span>
+            <span>UX DESIGNER</span>
+            <span class="outline">DESIGN SYSTEMS</span>
+            <span>PRODUCT CLARITY</span>
+            <span class="outline">UX DESIGNER</span>
           </div>
         </div>
-      </div>
-
-      <div class="workbench" aria-label="Abstract UX workbench visualization">
-        <div class="workbench-top">
-          <span class="dot"></span>
-          <span class="dot"></span>
-          <span class="dot"></span>
-        </div>
-        <div class="workbench-stage">
-          <div class="panel panel-large">
-            <div class="panel-header">
-              Journey analysis
-              <span class="pill">Research</span>
-            </div>
-            <div class="mock-content">
-              <div class="line"></div>
-              <div class="line"></div>
-              <div class="line"></div>
-              <div class="chart" aria-hidden="true">
-                <span class="bar" style="height: 48%;"></span>
-                <span class="bar" style="height: 76%;"></span>
-                <span class="bar" style="height: 36%;"></span>
-                <span class="bar" style="height: 88%;"></span>
-                <span class="bar" style="height: 64%;"></span>
-                <span class="bar" style="height: 54%;"></span>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel panel-small">
-            <div class="panel-header">
-              Prototype
-              <span class="pill">V4</span>
-            </div>
-            <div class="mock-content">
-              <div class="tile-grid" aria-hidden="true">
-                <span class="tile"></span>
-                <span class="tile"></span>
-                <span class="tile"></span>
-                <span class="tile"></span>
-              </div>
-            </div>
-          </div>
-
-          <div class="panel panel-map">
-            <div class="panel-header">
-              Impact map
-              <span class="pill">Shipped</span>
-            </div>
-            <div class="mock-content">
-              <div class="map-row">
-                <span class="map-label">Findability</span>
-                <span class="map-track"><span class="map-fill" style="width: 82%;"></span></span>
-              </div>
-              <div class="map-row">
-                <span class="map-label">Reuse</span>
-                <span class="map-track"><span class="map-fill" style="width: 68%; background: var(--blue);"></span></span>
-              </div>
-              <div class="map-row">
-                <span class="map-label">Confidence</span>
-                <span class="map-track"><span class="map-fill" style="width: 91%; background: var(--coral);"></span></span>
-              </div>
-            </div>
+        <div class="hero-inner">
+          <p class="eyebrow">UX designer · design systems</p>
+          
+          <div class="actions">
+            <a class="button" href="#work">View featured work</a>
+            <a class="button secondary" href="mailto:hello@jefchin.design">Get in touch</a>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="section case-intro" id="work" aria-labelledby="work-title">
-      <div class="section-heading">
-        <h2 id="work-title">Selected work</h2>
-        <p>Use these cards as your portfolio spine: each one has a clear problem, a design role, and measurable outcome language ready to replace with your real case study details.</p>
-      </div>
+      <section class="page" id="expertise" aria-labelledby="expertise-title">
+        <div class="section-head">
+          <h2 id="expertise-title">What I help teams do</h2>
+          <p>I’m interested in work where visual quality, product clarity, and systems thinking need to move together.</p>
+        </div>
+        <div class="expertise-grid">
+          <article class="expertise">
+            <span>01</span>
+            <h3>Audit fragmented experiences</h3>
+            <p class="body-copy">Map how patterns behave across surfaces, identify the real reasons they diverge, and turn that complexity into shared decisions.</p>
+          </article>
+          <article class="expertise">
+            <span>02</span>
+            <h3>Design reusable systems</h3>
+            <p class="body-copy">Define component anatomy, variants, states, responsive behavior, usage guidance, and design tokens that product teams can adopt.</p>
+          </article>
+          <article class="expertise">
+            <span>03</span>
+            <h3>Bridge design and delivery</h3>
+            <p class="body-copy">Partner with engineers and QA through specifications, accessibility checks, implementation review, and release-ready documentation.</p>
+          </article>
+        </div>
+      </section>
 
-      <div class="filter-bar" role="toolbar" aria-label="Filter portfolio work">
-        <button class="filter-button" type="button" data-filter="all" aria-pressed="true">All</button>
-        <button class="filter-button" type="button" data-filter="product" aria-pressed="false">Product UX</button>
-        <button class="filter-button" type="button" data-filter="system" aria-pressed="false">Design systems</button>
-        <button class="filter-button" type="button" data-filter="research" aria-pressed="false">Research</button>
-      </div>
-
-      <div class="case-grid">
-        <article class="case-card" data-category="product">
-          <div class="case-visual product">
-            <div class="device">
-              <div class="device-grid">
-                <div class="sidebar-lines">
-                  <span class="tiny-line strong"></span>
-                  <span class="tiny-line"></span>
-                  <span class="tiny-line"></span>
-                  <span class="tiny-line"></span>
-                </div>
-                <div class="content-lines">
-                  <span class="tiny-line strong" style="width: 58%;"></span>
-                  <span class="tiny-line" style="width: 92%;"></span>
-                  <span class="tiny-line" style="width: 72%;"></span>
-                  <div class="tile-grid">
-                    <span class="tile"></span>
-                    <span class="tile"></span>
-                    <span class="tile"></span>
-                    <span class="tile"></span>
-                  </div>
-                </div>
+      <section class="page" id="work" aria-labelledby="work-title">
+        <div class="section-head">
+          <h2 id="work-title">Featured work</h2>
+          <p>A case study about turning a repeated but inconsistent Toyota vehicle-card pattern into a scalable component model.</p>
+        </div>
+        <article class="work-card">
+          <div class="visual" aria-label="Abstract vehicle card system visual">
+            <div class="visual-top">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <div class="visual-body">
+              <div class="mini-card">
+                <div class="mini-line strong"></div>
+                <div class="mini-line" style="width: 84%;"></div>
+                <div class="mini-vehicle"></div>
+              </div>
+              <div class="mini-card">
+                <div class="mini-line strong" style="background: var(--blue); width: 48%;"></div>
+                <div class="mini-line" style="width: 72%;"></div>
+                <div class="mini-vehicle"></div>
+              </div>
+              <div class="mini-card">
+                <div class="mini-line strong" style="background: var(--warm); width: 58%;"></div>
+                <div class="mini-line" style="width: 92%;"></div>
+                <div class="mini-vehicle"></div>
+              </div>
+              <div class="mini-card">
+                <div class="mini-line strong" style="width: 68%;"></div>
+                <div class="mini-line" style="width: 64%;"></div>
+                <div class="mini-vehicle"></div>
               </div>
             </div>
           </div>
-          <div class="case-body">
-            <h3>Brand hub workflow redesign</h3>
-            <p>Reframed a sprawling guideline experience into searchable tasks, reusable components, and clearer decision paths for internal teams.</p>
-            <div class="case-meta">
-              <span class="tag">Information architecture</span>
-              <span class="tag">Interaction design</span>
-              <span class="tag">Prototype</span>
-            </div>
-            <button class="text-link" type="button" data-case="brandhub">Read case summary</button>
-          </div>
-        </article>
-
-        <article class="case-card" data-category="system">
-          <div class="case-visual system">
-            <div class="device">
-              <div class="content-lines">
-                <span class="tiny-line strong" style="width: 48%; background: var(--coral);"></span>
-                <span class="tiny-line" style="width: 78%;"></span>
-                <div class="tile-grid">
-                  <span class="tile"></span>
-                  <span class="tile"></span>
-                  <span class="tile"></span>
-                  <span class="tile"></span>
-                </div>
-                <span class="tiny-line" style="width: 66%;"></span>
-                <span class="tiny-line" style="width: 86%;"></span>
-              </div>
-            </div>
-          </div>
-          <div class="case-body">
-            <h3>Component audit and QA system</h3>
-            <p>Built a shared audit model that gave design, engineering, and QA the same language for defects, variants, and acceptance criteria.</p>
-            <div class="case-meta">
-              <span class="tag">Systems thinking</span>
-              <span class="tag">QA strategy</span>
+          <div>
+            <p class="eyebrow">Toyota · Design systems research</p>
+            <h3>Vehicle Card Research</h3>
+            <p class="body-copy">Mapped vehicle card patterns across 10 Toyota surfaces, decomposed the pattern into reusable zones, and shaped the findings into a unified component specification.</p>
+            <div class="tags">
+              <span class="tag">Cross-surface audit</span>
+              <span class="tag">Component anatomy</span>
+              <span class="tag">Design systems</span>
               <span class="tag">Documentation</span>
             </div>
-            <button class="text-link" type="button" data-case="audit">Read case summary</button>
+            <a class="button" href="vehicle-card-research-case-study.html">Read case study</a>
           </div>
         </article>
+      </section>
 
-        <article class="case-card" data-category="research">
-          <div class="case-visual research">
-            <div class="device">
-              <div class="content-lines">
-                <span class="tiny-line strong" style="width: 62%; background: var(--blue);"></span>
-                <span class="tiny-line" style="width: 86%;"></span>
-                <span class="tiny-line" style="width: 54%;"></span>
-                <div class="chart" aria-hidden="true">
-                  <span class="bar" style="height: 64%;"></span>
-                  <span class="bar" style="height: 42%;"></span>
-                  <span class="bar" style="height: 88%;"></span>
-                  <span class="bar" style="height: 72%;"></span>
-                  <span class="bar" style="height: 52%;"></span>
-                  <span class="bar" style="height: 78%;"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="case-body">
-            <h3>Vehicle Card Research</h3>
-            <p>Mapped Toyota vehicle card patterns across 10 surfaces and shaped the findings into a unified component specification.</p>
-            <div class="case-meta">
-              <span class="tag">Design systems</span>
-              <span class="tag">Cross-surface audit</span>
-              <span class="tag">Component spec</span>
-            </div>
-            <a class="text-link" href="vehicle-card-research-case-study.html">Read case study</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="capabilities" id="capabilities" aria-labelledby="capabilities-title">
-      <div class="section">
-        <div class="section-heading">
-          <h2 id="capabilities-title">What I bring</h2>
-          <p>A portfolio should show range without feeling generic. These capability blocks connect the dots between strategy, craft, and delivery.</p>
-        </div>
-        <div class="capability-grid">
-          <div class="capability">
-            <span class="capability-number">01</span>
-            <h3>Discovery to direction</h3>
-            <p>Research synthesis, journey mapping, service blueprints, and sharp product framing.</p>
-          </div>
-          <div class="capability">
-            <span class="capability-number">02</span>
-            <h3>Flows and prototypes</h3>
-            <p>End-to-end task flows, low-risk interaction models, and testable prototypes.</p>
-          </div>
-          <div class="capability">
-            <span class="capability-number">03</span>
-            <h3>Design systems</h3>
-            <p>Reusable components, pattern libraries, content rules, and governance models.</p>
-          </div>
-          <div class="capability">
-            <span class="capability-number">04</span>
-            <h3>Launch readiness</h3>
-            <p>Accessibility checks, QA collaboration, acceptance criteria, and implementation notes.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section about" id="about" aria-labelledby="about-title">
-      <div class="about-grid">
-        <div class="portrait" aria-label="Abstract designer portrait card">
-          <div class="portrait-card">
-            <strong>Systems minded, human first.</strong>
-            <span>Product design, UX strategy, and design operations.</span>
-          </div>
+      <section class="page about" id="about" aria-labelledby="about-title">
+        <div class="about-panel">
+          <strong>Looking for roles where design systems meet product reality.</strong>
+          <p class="body-copy">Especially teams that care about accessibility, shared visual language, governance, and close designer-engineer collaboration.</p>
         </div>
         <div class="about-copy">
           <p class="eyebrow">About</p>
-          <h2 id="about-title">I make complex product work feel understandable.</h2>
-          <p>My best work sits between big ambiguous problems and the details that make an interface feel calm. I like turning business rules, stakeholder feedback, and user needs into crisp flows, strong components, and documentation teams can trust.</p>
-          <p>Swap this section with your real background, clients, industries, and design philosophy. The layout is intentionally structured so it can support senior-level depth without becoming a wall of text.</p>
-          <div class="timeline" aria-label="Experience highlights">
-            <div class="timeline-item">
-              <time>Now</time>
-              <div>
-                <h3>UX and product systems</h3>
-                <p>Designing brand, commerce, and internal tool experiences with strong operational requirements.</p>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <time>Before</time>
-              <div>
-                <h3>Research, QA, and delivery</h3>
-                <p>Building the artifacts teams need to move from insight to implementation with confidence.</p>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <time>Always</time>
-              <div>
-                <h3>Clarity over decoration</h3>
-                <p>Prioritizing durable structure, useful hierarchy, and interactions that respect attention.</p>
-              </div>
-            </div>
-          </div>
+          <h2 id="about-title">I like turning ambiguity into something teams can use.</h2>
+          <p class="body-copy">My best work sits between strategy and detail: understanding why a product pattern became fragmented, creating a clearer model, and making the guidance practical enough for teams to adopt.</p>
+          <p class="body-copy">I bring research judgment, visual craft, systems thinking, and a delivery mindset. The goal is not just a cleaner mockup. It is a pattern that can survive real product constraints.</p>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="section contact" aria-labelledby="contact-title">
-      <div class="contact-panel">
-        <div>
+      <section class="page contact" id="contact" aria-labelledby="contact-title">
+        <div class="contact-card">
           <p class="eyebrow">Contact</p>
-          <h2 id="contact-title">Have a product problem worth untangling?</h2>
-          <p>Replace this email with your preferred contact method, then add your resume, LinkedIn, or calendar link when you are ready.</p>
+          <h2 id="contact-title">Let’s build something clear.</h2>
+          <p>I’m open to UX and design systems opportunities where component quality, product coherence, and cross-functional delivery matter.</p>
+          <a class="button" href="mailto:hello@jefchin.design">hello@jefchin.design</a>
         </div>
-        <a class="button" href="mailto:hello@jefchin.design">hello@jefchin.design</a>
-      </div>
-    </section>
-  </main>
+      </section>
+    </main>
 
-  <footer class="footer">
-    <span>Jef Chin UX Portfolio</span>
-    <span>Designed and built as a standalone HTML prototype.</span>
-  </footer>
-
-  <div class="modal" id="case-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="modal-panel">
-      <div class="modal-header">
-        <div>
-          <h3 class="modal-title" id="modal-title">Case summary</h3>
-          <p class="modal-kicker" id="modal-kicker">Portfolio case study</p>
-        </div>
-        <button class="icon-button" type="button" data-close-modal aria-label="Close case summary">x</button>
-      </div>
-      <div class="modal-body" id="modal-body"></div>
-    </div>
+    <footer class="page">
+      <span>Jeff Chin · UX & Design Systems</span>
+      <span>Portfolio prototype for GitHub Pages</span>
+    </footer>
   </div>
-
-  <script>
-    const caseData = {
-      brandhub: {
-        title: "Brand hub workflow redesign",
-        kicker: "Product UX, IA, prototyping",
-        sections: [
-          ["Problem", "Teams needed brand guidance, but the experience made people hunt through disconnected pages and interpret rules without enough context."],
-          ["Approach", "Mapped common tasks, grouped guidance by decision type, and prototyped a component-driven model with clear states, examples, and next actions."],
-          ["Outcome", "The redesign positioned the hub as a working tool instead of a static reference site, with cleaner handoff paths for design, content, and engineering."]
-        ]
-      },
-      audit: {
-        title: "Component audit and QA system",
-        kicker: "Design systems, QA strategy, documentation",
-        sections: [
-          ["Problem", "Component quality was hard to track because teams used different definitions for variants, defects, severity, and launch readiness."],
-          ["Approach", "Created an audit framework with shared criteria, visual baselines, issue categories, and documentation templates for repeatable review."],
-          ["Outcome", "The system made product gaps easier to discuss, prioritize, and verify before release."]
-        ]
-      },
-      shopping: {
-        title: "Shopping tool validation",
-        kicker: "Research, heuristic review, release support",
-        sections: [
-          ["Problem", "A shopping workflow needed validation across UX clarity, visual quality, and acceptance criteria before handoff."],
-          ["Approach", "Reviewed screens against expected behavior, captured defects, grouped risks by user impact, and shaped findings into a practical QA pack."],
-          ["Outcome", "The team received a clearer path from findings to fixes, with evidence that could support Jira tickets and release decisions."]
-        ]
-      }
-    };
-
-    const filterButtons = document.querySelectorAll(".filter-button");
-    const caseCards = document.querySelectorAll(".case-card");
-
-    filterButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const filter = button.dataset.filter;
-        filterButtons.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
-        caseCards.forEach((card) => {
-          const isVisible = filter === "all" || card.dataset.category === filter;
-          card.hidden = !isVisible;
-        });
-      });
-    });
-
-    const modal = document.getElementById("case-modal");
-    const modalTitle = document.getElementById("modal-title");
-    const modalKicker = document.getElementById("modal-kicker");
-    const modalBody = document.getElementById("modal-body");
-    const closeModalButton = document.querySelector("[data-close-modal]");
-    let lastFocusedElement = null;
-
-    function openCaseModal(caseKey) {
-      const data = caseData[caseKey];
-      if (!data) return;
-
-      lastFocusedElement = document.activeElement;
-      modalTitle.textContent = data.title;
-      modalKicker.textContent = data.kicker;
-      modalBody.innerHTML = data.sections.map(([heading, body]) => `
-        <section class="modal-section">
-          <h4>${heading}</h4>
-          <p>${body}</p>
-        </section>
-      `).join("");
-      modal.classList.add("is-open");
-      closeModalButton.focus();
-    }
-
-    function closeCaseModal() {
-      modal.classList.remove("is-open");
-      if (lastFocusedElement) {
-        lastFocusedElement.focus();
-      }
-    }
-
-    document.querySelectorAll("[data-case]").forEach((button) => {
-      button.addEventListener("click", () => openCaseModal(button.dataset.case));
-    });
-
-    closeModalButton.addEventListener("click", closeCaseModal);
-
-    modal.addEventListener("click", (event) => {
-      if (event.target === modal) {
-        closeCaseModal();
-      }
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && modal.classList.contains("is-open")) {
-        closeCaseModal();
-      }
-    });
-  </script>
 </body>
 </html>
